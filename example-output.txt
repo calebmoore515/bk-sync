@@ -1,0 +1,55 @@
+Data for DLX PRIVATE tickets
+
+Fulbot command to sync to 314
+sync p 271952,272064,272061,272062,272066,272068,272069,272059,272063,272065,272067,272060,271956,271957,271954,271955,271958,272087,272086,271960,272058 to c 447
+
+Fulbot command to sync to 585 only (Should be auto-synced)
+sync p  to c 731
+
+Number of audiences to be synced: 21
+Number of tickets needing taxonomy: 6
+
+Jira links (Should open automatically)
+https://jira.server.com/browse/CAM-542274
+https://jira.server.com/browse/CAM-542746
+https://jira.server.com/browse/CAM-542521
+https://jira.server.com/browse/CAM-542789
+https://jira.server.com/browse/CAM-542603
+https://jira.server.com/browse/CAM-542736
+
+Tickets Not Opened
+
+Total tickets in queue: 6
+
+
+Would you like to update mappings in Jira (Y/N): y
+Now updating mapping in Jira
+
+
+Strategy Ticket: https://jira.server.com/browse/CAM-542273
+Original Mapping: 271952(585)
+Updated Mapping: 271952(585),271952(314)
+
+Strategy Ticket: https://jira.server.com/browse/CAM-542745
+Original Mapping: 272064(585),272061(585),272062(585),272066(585),272068(585),272069(585),272059(585),272063(585),272065(585),272067(585),272060(585)
+Updated Mapping: 272064(585),272061(585),272062(585),272066(585),272068(585),272069(585),272059(585),272063(585),272065(585),272067(585),272060(585),272064(314),272061(314),272062(314),272066(314),272068(314),272069(314),272059(314),272063(314),272065(314),272067(314),272060(314)
+
+Strategy Ticket: https://jira.server.com/browse/CAM-542520
+Original Mapping: 271956(585),271957(585),271954(585),271955(585),271958(585)
+Updated Mapping: 271956(585),271957(585),271954(585),271955(585),271958(585),271956(314),271957(314),271954(314),271955(314),271958(314)
+
+Strategy Ticket: https://jira.server.com/browse/CAM-542788
+Original Mapping: 272087(585),272086(585)
+Updated Mapping: 272087(585),272086(585),272087(314),272086(314)
+
+Strategy Ticket: https://jira.server.com/browse/CAM-542602
+Original Mapping: 271960(585)
+Updated Mapping: 271960(585),271960(314)
+
+Strategy Ticket: https://jira.server.com/browse/CAM-542735
+Original Mapping: 272058(585)
+Updated Mapping: 272058(585),272058(314)
+
+6 tickets updated
+
+Process finished with exit code 0
