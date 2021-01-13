@@ -20,16 +20,18 @@ update_count = 0
 options = {'server': 'server_address.com'}
 jira = JIRA(options, basic_auth=('username', 'pass'))
 
+#JQL to pull "parent" target issues 
+
 issues_in_proj = jira.search_issues('project = CAM AND issuetype in ("Fulfillment Metadata Issue") '
                                     'AND status = Open AND cf[12345] ~ BlueKai AND "Fulfill Channel ID" ~ 585 AND '
                                     'labels = "cf"')
+
+#Sub-query to pull "child" target issue, which is where the needed data is stored
 
 for issue in issues_in_proj:
     strategy = jira.search_issues('issue in linkedIssues(' + str(issue) + ', "Strategy") AND status in (Audience, '
                                                                           '"Scorecard Approval", "Post Processing")')
 
-pbt = 'PBT'
-syndicated = 'Syndicated'
 branded = 'Branded'
 
 no_sync = []
@@ -39,13 +41,12 @@ listed = []
 overall_mapping_maids = []
 overall_mapping_no_maids = []
 
+#This loop filters tickets based on a boolean field in Jira. Determines if data needs to be synced to additional component.
+#Data is then cleaned using regex and .join, then formats the data using .replace.
+
 for issue in issues_in_proj:
     summary = str(issue.raw['fields']['summary'])
-
     if branded.lower() in summary.lower():
-        no_sync.append(issue)
-        count1 += 1
-    elif pbt.lower() in summary.lower():
         no_sync.append(issue)
         count1 += 1
     elif issue.fields.customfield_17027 == 'true':
@@ -63,15 +64,21 @@ for issue in issues_in_proj:
 
 print('Data for DLX PRIVATE tickets')
 
+#Produces formatted data that is designed to be input into fulbot, an internal slackbot that helps sync data to new components.
+
 print('\nFulbot command to sync to 314')
 print('sync p ' + (','.join(overall_mapping_maids)) + ' to c 447')
 
 print('\nFulbot command to sync to 585 only (Should be auto-synced)')
 print('sync p ' + (','.join(overall_mapping_no_maids)) + ' to c 731')
 
+#Basic metrics that are used to ensure that we are capturing all the data needed
+
 counter = ((','.join(listed)).count(','))+1
 print('\nNumber of audiences to be synced: ' + str(counter))
 print('Number of tickets needing taxonomy: ' + str(count))
+
+#Interacts with chrome to open tabs. Depending on daily volume this can be > 20 tabs
 
 print('\nJira links (Should open automatically)')
 for issue in issues_in_proj_sync:
@@ -99,6 +106,8 @@ elif proceed.lower() == 'n':
 
 original_mapping_585 = []
 new_mapping_maids = []
+
+#Hits Jira API to add new mappings
 
 for issue in issues_in_proj:
     if issue.fields.customfield_17027 == 'true':
