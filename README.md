@@ -23,6 +23,7 @@ Process orginally took ~30min to complete and now takes <1 min. Over the course 
 4. If the fulbot command is failing, check the query for double commas `ex. sync p 1234,4567,,6789 to p 447`. Remove and then resubmit command. This is caused when data type is segment instead of profile. Segments must be manaully synced.
 
 #### Future improvements 
- It would be helpful to update the code to distinguish and automatically parse out segment data types (which is what causes \#4 above). I have not done this yet since there is no clear marker in the ticket that can be used to filter, and they are somewhat uncommon occurences so I cannot currently justify the developement effort.
+1. It would be helpful to update the code to distinguish and automatically parse out segment data types (which is what causes \#4 above). I have not done this yet since there is no clear marker in the ticket that can be used to filter, and they are somewhat uncommon occurences so I cannot currently justify the developement effort.
 
+2. It's not necessary to improve functionality, but producing a log file of the output would be helpful. This would allow us to save the fulbot command and re-run it if we discover issues later in the workflow. 
 
