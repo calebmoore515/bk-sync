@@ -22,8 +22,8 @@ jira = JIRA(options, basic_auth=('username', 'pass'))
 
 #JQL to pull "parent" target issues 
 
-issues_in_proj = jira.search_issues('project = CAM AND issuetype in ("Fulfillment Metadata Issue") '
-                                    'AND status = Open AND cf[12345] ~ BlueKai AND "Fulfill Channel ID" ~ 585 AND '
+issues_in_proj = jira.search_issues('project = ABC AND issuetype in ("Ticket Type") '
+                                    'AND status = Open AND cf[12345] ~ Platform AND "Fulfill Channel ID" ~ 123 AND '
                                     'labels = "cf"')
 
 #Sub-query to pull "child" target issue, which is where the needed data is stored
@@ -51,13 +51,13 @@ for issue in issues_in_proj:
         count1 += 1
     elif issue.fields.customfield_17027 == 'true':
         issues_in_proj_sync.append(str(issue))
-        mapping = "".join(re.sub(r'\((\d+)*\)', "", issue.fields.customfield_10911)).replace("", "")
+        mapping = "".join(re.sub(r'\((\d+)*\)', "", issue.fields.customfield_123456)).replace("", "")
         overall_mapping_maids.append(mapping)
         listed.append(issue.fields.customfield_10911)
         count += 1
     elif issue.fields.customfield_17027 == 'false':
         issues_in_proj_sync.append(str(issue))
-        mapping = "".join(re.sub(r'\((\d+)*\)', "", issue.fields.customfield_10911)).replace("", "")
+        mapping = "".join(re.sub(r'\((\d+)*\)', "", issue.fields.customfield_123456)).replace("", "")
         overall_mapping_no_maids.append(mapping)
         listed.append(issue.fields.customfield_10911)
         count += 1
@@ -110,11 +110,10 @@ new_mapping_maids = []
 #Hits Jira API to add new mappings
 
 for issue in issues_in_proj:
-    if issue.fields.customfield_17027 == 'true':
+    if issue.fields.customfield_34567 == 'true':
         strategy = jira.search_issues('issue in linkedIssues(' + str(issue) + ', "Strategy") AND status in (Audience, '
                                                                               '"Scorecard Approval", '
-                                                                              '"Post Processing") AND issue != '
-                                                                              'CAM-332380')
+                                                                              '"Post Processing"))
         original_mapping_585.append(issue.fields.customfield_11111)
         print('\nStrategy Ticket: https://jira.server.com/browse/' + str(strategy)[19:-17])
         print('Original Mapping: ' + str(','.join(original_mapping_585)))
