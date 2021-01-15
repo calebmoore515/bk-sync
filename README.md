@@ -2,7 +2,7 @@
 
 #### Description
 
-Queries internal jira server (server name removed) for all active issues marked with a `cf` label
+Queries internal jira server (server name removed) for all active issues marked with a `cf` label. This script is designed to work in tandem with jira-ticket.py, both utilize the same JQL query. This script is run first, followed by jira-ticket.
 
 A single field containing pertinent information is then pulled from each issue, the data is cleaned and formatted using regex, into an output that is used as a command into an internal slackbot. It also opens all issues in a chrome browser so that necessary data can be pulled from each ticket and placed into a spreadsheet.
 
