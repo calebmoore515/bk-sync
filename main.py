@@ -5,6 +5,8 @@
 # Once all tickets are marked, you can run the script. Plug the query into Fulbot and then progress the script with a
 # 'y' to complete the mapping update
 
+#Testing git setup
+
 from jira.client import JIRA  # --> installed with `pip install jira` in the terminal
 import re  # Regex component
 import webbrowser
